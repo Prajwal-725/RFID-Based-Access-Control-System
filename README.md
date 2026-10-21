@@ -2,47 +2,56 @@
 
 ## About the Project
 
-This project is based on RFID (Radio Frequency Identification) technology and uses an Arduino Uno and an RC522 RFID reader to scan RFID cards and identify authorized users.
+This project is an RFID-based access control system developed using an Arduino Uno and an RC522 (MFRC522) RFID reader. It scans RFID cards, checks whether the card is authorized, and displays the result on an I2C LCD.
 
-The Arduino processes the card information received from the RFID reader and checks it against the authorization logic programmed into the system. Based on the result, the system determines whether access should be granted or denied.
+The system also uses a buzzer to provide audio feedback for successful and unsuccessful scans. I developed this project to gain practical experience with Arduino programming, RFID technology, LCD interfacing, and embedded systems.
 
-The project helped me understand how RFID technology works and how a microcontroller can be used to develop a simple access control system.
+## Features
 
-## Objectives
-
-- To understand the working principle of RFID technology.
-- To interface an RC522 RFID reader with an Arduino Uno.
-- To read and identify RFID cards or tags.
-- To implement basic access authorization logic.
-- To gain practical experience in embedded systems and hardware interfacing.
+- Reads RFID card identifiers using the RC522 module.
+- Checks scanned card UIDs against an authorized UID stored in the program.
+- Displays access status on a 16x2 I2C LCD.
+- Produces a long beep for an authorized card.
+- Produces three short beeps for an unauthorized card.
+- Prints scanned card UIDs and access results to the Serial Monitor.
+- Returns to the home screen after displaying the scan result.
 
 ## Hardware Components
 
 - Arduino Uno
 - RC522 (MFRC522) RFID reader module
 - Compatible RFID card or tag
-- Breadboard and jumper wires, if used
-- USB cable and suitable power supply
+- 16x2 LCD with I2C interface
+- Buzzer
+- Breadboard and jumper wires
+- USB cable and suitable power connections
 
 ## Software and Libraries
 
 - Arduino IDE
-- MFRC522 library
 - SPI library
+- MFRC522 library
+- Wire library
+- hd44780 LCD library
 
-## Working Principle
+The SPI and Wire libraries are included with the standard Arduino environment for supported boards. Install the MFRC522 and hd44780 libraries through the Arduino IDE Library Manager if needed.
 
-1. The RC522 RFID reader waits for a compatible RFID card or tag.
-2. When a card is scanned, the reader obtains its identifier.
-3. The Arduino Uno processes the identifier.
-4. The program checks whether the card is authorized.
-5. The system responds according to the result of the authorization check.
+## How It Works
 
-The exact output depends on the functionality implemented in the Arduino code.
+1. The system initializes the RFID reader, LCD, and buzzer.
+2. The LCD displays the home screen and prompts the user to scan a card.
+3. When a compatible RFID card is detected, the Arduino reads its UID.
+4. The program compares the scanned UID with the authorized UID stored in the code.
+5. If the UID matches, the LCD displays a welcome message and the buzzer produces one long beep.
+6. If the UID does not match, the LCD displays an unknown-user message and the buzzer produces three short beeps.
+7. The scanned UID and access result are printed to the Serial Monitor.
+8. After three seconds, the LCD returns to the home screen.
 
-## Typical Circuit Connections
+## Circuit Connections
 
-The following connections are commonly used when interfacing an RC522 module with an Arduino Uno using SPI.
+The following are the pin assignments used in the supplied Arduino code, together with typical RC522 SPI connections.
+
+### RC522 to Arduino Uno
 
 | RC522 Pin | Arduino Uno Pin |
 |---|---|
@@ -55,43 +64,66 @@ The following connections are commonly used when interfacing an RC522 module wit
 | 3.3V | 3.3V |
 | IRQ | Not connected |
 
-**Note:** Verify these pin assignments against your actual circuit and Arduino code. The RC522 operates at 3.3V; do not power it from the Arduino's 5V pin. Check the signal-voltage compatibility of your module before connecting it.
+### Buzzer
+
+| Buzzer Connection | Arduino Uno Pin |
+|---|---|
+| Signal | D6 |
+| GND | GND |
+
+### I2C LCD
+
+| LCD Connection | Arduino Uno Pin |
+|---|---|
+| SDA | A4 |
+| SCL | A5 |
+| VCC | According to the LCD module's requirements |
+| GND | GND |
+
+Verify all connections against your actual hardware. The RC522 is a 3.3V device; do not power it from the Arduino Uno's 5V pin. Check signal-voltage compatibility as well.
 
 ## How to Run the Project
 
 1. Install the Arduino IDE.
-2. Install the MFRC522 library through the Arduino IDE Library Manager.
-3. Connect the RC522 module to the Arduino Uno.
-4. Open the project `.ino` file in the Arduino IDE.
-5. Check the pin definitions and select the correct board and port.
-6. Upload the program to the Arduino Uno.
-7. Scan a compatible RFID card and observe the system's response.
+2. Install the MFRC522 and hd44780 libraries using Library Manager.
+3. Connect the RC522, I2C LCD, and buzzer to the Arduino Uno.
+4. Open `rfid_access_control.ino` in the Arduino IDE.
+5. Configure the authorized card UID in the source code.
+6. Select Arduino Uno and the correct serial port.
+7. Upload the program to the board.
+8. Open the Serial Monitor at 9600 baud.
+9. Scan an authorized card and an unauthorized card to observe the system's response.
 
-## Results
+## Project Images
 
-The project is intended to demonstrate RFID card identification and basic access authorization. Add your actual test results and photographs here after verifying the system with authorized and unauthorized cards.
+Photos of the actual circuit and hardware can be added here.
 
-## Skills Learned
+![RFID project circuit](images/rfid-circuit.jpg)
 
-- Arduino programming
-- Embedded systems
-- RFID technology
+![RFID project hardware](images/rfid-hardware.jpg)
+
+Update the image paths to match the filenames in your repository.
+
+## Skills Demonstrated
+
+- Arduino programming in C/C++
+- Embedded systems development
+- RFID card identification
 - SPI communication
-- Microcontroller interfacing
+- I2C communication
+- LCD and buzzer interfacing
 - Basic access control logic
+- Hardware and software integration
 
 ## Future Improvements
 
-- Add an LCD or OLED display to show access status.
-- Integrate a buzzer or LEDs for visual and audio feedback.
-- Connect a suitable relay or electronic lock driver for physical door control.
-- Add access logs and improved credential management.
-
-These are possible future enhancements, not features claimed to be implemented in the current project.
+- Add a relay and suitable driver circuit to control an electronic lock.
+- Store authorized credentials more securely.
+- Add access logs with timestamps.
+- Improve credential management and administrative controls.
 
 ## Author
 
 **[Prajwal V]**
 
 Electronics and Communication Engineering (ECE)
-

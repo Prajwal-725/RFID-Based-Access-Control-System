@@ -98,9 +98,29 @@ Verify all connections against your actual hardware. The RC522 is a 3.3V device;
 
 Photos of the actual circuit and hardware can be added here.
 
-![RFID project circuit](images/rfid-circuit.jpg)
+## Project Images
 
-![RFID project hardware](images/rfid-hardware.jpg)
+### Hardware Setup
+
+![RFID Hardware Setup](rfid-hardware.jpeg)
+
+### Access Granted
+
+![RFID Access Granted](rfid-access-granted.jpeg)
+
+### Access Denied
+
+![RFID Access Denied](rfid-access-denied.jpeg)
+
+### Serial Monitor Results
+
+**Access Granted**
+
+![Serial Monitor Access Granted](rfid-access-granted-serial%20Monitor.jpeg)
+
+**Access Denied**
+
+![Serial Monitor Access Denied](rfid-access-denied-serial%20Monitor.jpeg)
 
 Update the image paths to match the filenames in your repository.
 
